@@ -25,7 +25,7 @@ You can cick on `Reset` and draw a new shape.
 
 
 ### TODO:
-- [ ] Add more feedback when the models is ready to train or it finishes.
-- [ ] Add a more dynamic way to load the dataset for training.
+- [X] Add more feedback when the models is ready to train or it finishes [commit](https://github.com/en3sis/ml-classificator/commit/d3bc362e1ac0239ffa744003c337baa80b226076)
+- [X] Add a more dynamic way to load the dataset for training [commit](https://github.com/en3sis/ml-classificator/commit/66195d34d6c489b730b4e9536f4ef2adaa398857).
 - [ ] Load pre-trained model.
-- [ ] Add field that allows you to rename the saved image.
+- [ ] Add field that allows you to rename the currect canvas image.
