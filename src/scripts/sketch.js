@@ -1,19 +1,21 @@
-let featureExtractor, classifier, label, confidence, ctx, dataLoaded = false;
+let featureExtractor, classifier, label, confidence, ctx, dataLoaded = false, trained = false
 
-const trainRight = [];
-const trainLeft = [];
+const trainRight = []
+const trainLeft = []
 const trainClock = []
 const trainX = []
 
+$(function () {
+  $('.btn-group').hide()
+})
 
 function preload () {
   featureExtractor = ml5.featureExtractor('MobileNet', { numLabels: 4, epochs: 50 })
   classifier = featureExtractor.classification()
 
-
-/* ==========================================================================
-Loading training data
-========================================================================== */
+  /* ==========================================================================
+  Loading training data
+  ========================================================================== */
   for (let i = 0; i < 10; i++) {
     trainRight.push(loadImage(`dataset/arrow-right/arrow${i}.jpg`))
   }
@@ -30,10 +32,12 @@ Loading training data
     trainX.push(loadImage(`dataset/x/x${i}.jpg`))
   }
 
+  appState.status = 'loaded'
 }
 
 function setup () {
   ctx = createCanvas(280, 280);
+  ctx.parent('canvas')
   background(200)
 
   loadData(trainRight, 'arrow-right').then(res => {
@@ -55,8 +59,9 @@ function setup () {
     console.log('x dataset images loaded!')
     console.log(res)
     dataLoaded = true
+    $('.alert').text('Done! You can train the model now.')
+    $('.js-controller-model').show()
   })
-
 }
 
 
@@ -69,12 +74,14 @@ function draw () {
   if (!dataLoaded) {
     $('.alert').text('Loading training data...')
     $('.btn-group').hide()
+  }
+
+  if (!trained) {
+    $('#save-model').addClass('disabled')
   } else {
-    $('.alert').text('Done! You can train the model now.')
-    $('.btn-group').show()
+    $('#save-model').removeClass('disabled')
   }
 }
-
 
 async function loadData (arr, label) {
   const status = arr.map(async item => {
@@ -86,15 +93,16 @@ async function loadData (arr, label) {
 
 /* Controller
 ========================================================================== */
-
 const trainModel = () => {
   return classifier.train((lossValue) => {
-    // $('.alert').text('Training model...')
-
+    $('.alert').text(`Training model...  Loss value: ${lossValue}`)
     if (lossValue === null) {
-      // $('.alert').text('Model was trained')
+      $('.js-prediction').show()
+      $('.alert').text('✔  Training completed! \n You can now draw on the canvas and click on Predict button')
+      trained = true;
     }
-    console.log('Loss is', lossValue);
+
+    console.log('Loss is', lossValue)
   })
 }
 
@@ -116,11 +124,11 @@ const predict = () => {
 }
 
 const saveImage = () => {
-  saveCanvas(ctx, 'arrow0', 'jpg');
+  saveCanvas(ctx, 'arrow0', 'jpg')
 }
 
 const saveMovie = () => {
   classifier.save(cb => {
     console.log(cb)
-  }, 'eos-icon-classif');
+  }, 'eos-icon-classif')
 }

@@ -16,12 +16,18 @@ body {
 button {
   padding: 5px 10px;
   box-shadow: none;
-  background: #25baa4;
+  border: 1px solid #848484;
+  background-color: rgb(235, 235, 235);
   border: none;
   border-radius: 5px;
   margin: 5px ;
   display: flex;
   align-items: center;
+}
+
+button.primary {
+  background: #25baa4;
+  border: 1px solid #1d9e8b;
 }
 
 button:hover {
@@ -73,6 +79,7 @@ canvas {
 
 .alert {
   padding: 10px;
+  margin: 10px 0;
   background: #dfdfdf;
   border-radius: 5px;
 }
