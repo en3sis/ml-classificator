@@ -14,8 +14,8 @@
     <div class='alert'>
 
     </div>
-    <div class='btn-group'>
-      <button onclick="trainModel()">
+    <div class='btn-group js-controller-model'>
+      <button class="js-train" onclick="trainModel()">
         <i class='eos-icons'>model_training</i>
         Train Model
       </button>
@@ -28,6 +28,20 @@
         Load Model
       </button>
     </div>
+
+    <div class='prediction'>
+      <div id='label'>
+        <span>Label: </span>
+        <span id='label-value'>Null</span>
+      </div>
+      <div id='confidence'>
+        <span>Confidence: </span>
+        <span id='confidence-value'>
+          0
+        </span>
+      </div>
+    </div>
+    <div id='canvas'> </div>
 
     <div class='btn-group'>
       <button onclick="predict()">
@@ -44,28 +58,17 @@
       </button>
     </div>
 
-    <div class='prediction'>
-      <div id='label'>
-        <span>Label: </span>
-        <span id='label-value'>Null</span>
-      </div>
-      <div id='confidence'>
-        <span>Confidence: </span>
-        <span id='confidence-value'>
-          0
-        </span>
-      </div>
-    </div>
-<footer>
+
+  <footer>
   <a href='https://github.com/en3sis/ml-classificator' , target='_blank'>Github repository</a>
-</footer>
+  </footer>
   </body>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.js"
     integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
-<!-- p5 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.min.js"></script>
-<!-- ml5 -->
-<script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+  <!-- p5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.min.js"></script>
+  <!-- ml5 -->
+  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
 <script src='./scripts/sketch.js'></script>
 </html>

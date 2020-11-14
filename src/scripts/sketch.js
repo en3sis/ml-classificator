@@ -1,4 +1,4 @@
-let featureExtractor, classifier, label, confidence, ctx, dataLoaded = false;
+let featureExtractor, classifier, label, confidence, ctx, dataLoaded = false, trained = false;
 
 const trainRight = [];
 const trainLeft = [];
@@ -34,6 +34,8 @@ Loading training data
 
 function setup () {
   ctx = createCanvas(280, 280);
+  ctx.parent('canvas');
+
   background(200)
 
   loadData(trainRight, 'arrow-right').then(res => {
@@ -71,7 +73,7 @@ function draw () {
     $('.btn-group').hide()
   } else {
     $('.alert').text('Done! You can train the model now.')
-    $('.btn-group').show()
+    $('.js-controller').show()
   }
 }
 
@@ -89,10 +91,11 @@ async function loadData (arr, label) {
 
 const trainModel = () => {
   return classifier.train((lossValue) => {
+    $('.btn-group').hide()
     // $('.alert').text('Training model...')
 
     if (lossValue === null) {
-      // $('.alert').text('Model was trained')
+      $('.btn-group').show()
     }
     console.log('Loss is', lossValue);
   })
