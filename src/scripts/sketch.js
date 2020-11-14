@@ -107,8 +107,13 @@ const saveImage = () => {
   saveCanvas(ctx, 'arrow0', 'jpg')
 }
 
-const saveMovie = () => {
+const saveModel = () => {
   classifier.save(cb => {
     console.log(cb)
-  }, 'eos-icon-classif')
+  }, `model-${new Date().toISOString().slice(0, 10)}`)
+}
+
+
+const loadModel = () => {
+  // TODO: Load training data only on click, by default load local model once we have the v0.0.1
 }
