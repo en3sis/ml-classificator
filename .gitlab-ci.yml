@@ -1,0 +1,16 @@
+stages:
+  - deploy
+
+image: node:10.15.0
+
+
+pages:
+  stage: deploy
+  script:
+    - rm -rf public
+    - mv src public
+  artifacts:
+    paths:
+      - public # mandatory, other folder won't work
+  only:
+    - master # or dev, the branch you want to publish
