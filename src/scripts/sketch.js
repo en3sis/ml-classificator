@@ -1,67 +1,50 @@
 let featureExtractor, classifier, label, confidence, ctx, dataLoaded = false, trained = false
 
-const trainRight = []
-const trainLeft = []
-const trainClock = []
-const trainX = []
-
 $(function () {
-  $('.btn-group').hide()
+  $('.btn-group')
+    .hide()
 })
 
 function preload () {
-  featureExtractor = ml5.featureExtractor('MobileNet', { numLabels: 4, epochs: 50 })
-  classifier = featureExtractor.classification()
+  featureExtractor = ml5
+    .featureExtractor('MobileNet', { numLabels: 4, epochs: 50 })
 
-  /* ==========================================================================
-  Loading training data
+  classifier = featureExtractor
+    .classification()
+
+  /*  Loading training data
   ========================================================================== */
-  for (let i = 0; i < 10; i++) {
-    trainRight.push(loadImage(`dataset/arrow-right/arrow${i}.jpg`))
-  }
-
-  for (let i = 0; i < 10; i++) {
-    trainLeft.push(loadImage(`dataset/arrow-left/arrow${i}.jpg`))
-  }
-
-  for (let i = 0; i < 20; i++) {
-    trainClock.push(loadImage(`dataset/clock/clock${i}.jpg`))
-  }
-
-  for (let i = 0; i < 10; i++) {
-    trainX.push(loadImage(`dataset/x/x${i}.jpg`))
-  }
-
-  appState.status = 'loaded'
+  dataSet
+    .map(item => {
+      for (let i = 0; i < item.length; i++) {
+        item.examples.push(loadImage(`dataset/${item.label}/${item.label}-${i}.jpg`))
+    }
+    })
 }
 
-function setup () {
+async function setup () {
   ctx = createCanvas(280, 280);
-  ctx.parent('canvas')
+  ctx
+    .parent('canvas')
   background(200)
 
-  loadData(trainRight, 'arrow-right').then(res => {
-    console.log('right dataset images loaded!')
-    console.log(res)
-  })
-
-  loadData(trainLeft, 'arrow-left').then(res => {
-    console.log('left dataset images loaded!')
-    console.log(res)
-  })
-
-  loadData(trainClock, 'clock').then(res => {
-    console.log('clock dataset images loaded!')
-    console.log(res)
-  })
-
-  loadData(trainX, 'x').then(res => {
-    console.log('x dataset images loaded!')
-    console.log(res)
-    dataLoaded = true
-    $('.alert').text('Done! You can train the model now.')
-    $('.js-controller-model').show()
-  })
+  await Promise
+    .all(dataSet
+      .map(async item => {
+        try {
+          await loadData(item.examples, item.label)
+            .then(() => {
+              console.log(`✅ ${item.label} has been loaded!`)
+          })
+        } catch (error) {
+          console.log('Error on loadData(): ', error);
+        }
+      }))
+    .then(() => {
+      dataLoaded = true
+      $('.alert').text('🎉 Done! You can train the model now.')
+      $('.js-controller-model').show()
+    })
 }
 
 
@@ -72,7 +55,7 @@ function draw () {
   }
 
   if (!dataLoaded) {
-    $('.alert').text('Loading training data...')
+    $('.alert').text('⌛ Loading training data...')
     $('.btn-group').hide()
   }
 
@@ -84,21 +67,18 @@ function draw () {
 }
 
 async function loadData (arr, label) {
-  const status = arr.map(async item => {
-    return classifier.addImage(item.canvas, label)
-  })
-
-  return await Promise.all(status)
+  return await Promise
+    .all(arr.map(async item => await classifier.addImage(item.canvas, label)))
 }
 
 /* Controller
 ========================================================================== */
 const trainModel = () => {
   return classifier.train((lossValue) => {
-    $('.alert').text(`Training model...  Loss value: ${lossValue}`)
+    $('.alert').text(`⌛  Training model...  Loss value: ${lossValue}`)
     if (lossValue === null) {
       $('.js-prediction').show()
-      $('.alert').text('✔  Training completed! \n You can now draw on the canvas and click on Predict button')
+      $('.alert').text('✅ Training completed! \n You can now draw on the canvas and click on Predict button')
       trained = true;
     }
 

@@ -71,7 +71,6 @@ canvas {
   background: antiquewhite;
 }
 
-
 .disabled {
   background-color: gray;
 }
@@ -80,14 +79,12 @@ canvas {
   cursor: not-allowed;
 }
 
-
 .alert {
   padding: 10px 20px;
   margin: 10px 0;
   background: #dfdfdf;
   border-radius: 5px;
 }
-
 
 footer {
   position: absolute;
