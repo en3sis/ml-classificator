@@ -5,6 +5,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Roboto', sans-serif;
 }
 
 .btn-group {
@@ -74,4 +75,16 @@ canvas {
   padding: 10px;
   background: #dfdfdf;
   border-radius: 5px;
+}
+
+
+footer {
+  position: absolute;
+  bottom: 50px;
+}
+
+footer a, a:hover, a:active, a:visited {
+  text-decoration: none;
+  cursor: pointer;
+  color: #000;
 }
