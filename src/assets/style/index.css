@@ -1,3 +1,7 @@
+html, body {
+  background: rgb(17, 17, 17);
+}
+
 body {
   margin: 60px;
   margin-left: auto;
@@ -78,7 +82,7 @@ canvas {
 
 
 .alert {
-  padding: 10px;
+  padding: 10px 20px;
   margin: 10px 0;
   background: #dfdfdf;
   border-radius: 5px;
@@ -93,5 +97,5 @@ footer {
 footer a, a:hover, a:active, a:visited {
   text-decoration: none;
   cursor: pointer;
-  color: #000;
+  color: rgb(230, 230, 230);
 }
