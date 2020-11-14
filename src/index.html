@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <title>ml5.js</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/eos-icons/dist/css/eos-icons.css' />
-  <link rel='stylesheet' href='./assets/style/index.css'>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet">
+  <head>
+    <title>ml5.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/eos-icons/dist/css/eos-icons.css' />
+    <link rel='stylesheet' href='./assets/style/index.css'>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet">
   </head>
 
   <body>
@@ -15,15 +14,15 @@
 
     </div>
     <div class='btn-group js-controller-model'>
-      <button class="js-train" onclick="trainModel()">
+      <button class="js-train primary" onclick="trainModel()">
         <i class='eos-icons'>model_training</i>
         Train Model
       </button>
-      <button onclick="saveModel()">
+      <button id="save-model" onclick="saveModel()">
         <i class='eos-icons'>analytics</i>
         Save Model
       </button>
-      <button onclick="loadModel()">
+      <button id="load-model" class="disabled" onclick="loadModel()">
         <i class='eos-icons'>file_upload</i>
         Load Model
       </button>
@@ -35,7 +34,7 @@
         <span id='label-value'>Null</span>
       </div>
       <div id='confidence'>
-        <span>Confidence: </span>
+        <span> </span>
         <span id='confidence-value'>
           0
         </span>
@@ -43,8 +42,8 @@
     </div>
     <div id='canvas'> </div>
 
-    <div class='btn-group'>
-      <button onclick="predict()">
+    <div class='btn-group js-prediction'>
+      <button class="primary" onclick="predict()">
         <i class='eos-icons'>batch_prediction</i>
         Predict
       </button>
@@ -54,21 +53,22 @@
       </button>
       <button onclick="saveImage()">
         <i class='eos-icons'>save</i>
-        Save Image
+        Save canvas as JPG
       </button>
     </div>
 
-
-  <footer>
-  <a href='https://github.com/en3sis/ml-classificator' , target='_blank'>Github repository</a>
-  </footer>
+    <footer>
+      <a href='https://github.com/en3sis/ml-classificator' , target='_blank'>Github</a>
+    </footer>
   </body>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.js"
-    integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
-  <!-- p5 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.min.js"></script>
-  <!-- ml5 -->
-  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
-<script src='./scripts/sketch.js'></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.js"
+      integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+    <!-- p5 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.min.js"></script>
+    <!-- ml5 -->
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+    <!-- Custom -->
+    <script src='./scripts/sketch.js'></script>
+    <script src='./scripts/store.js'></script>
 </html>
