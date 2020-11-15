@@ -3,7 +3,7 @@ html, body {
 }
 
 body {
-  margin: 60px;
+  margin: 80px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -83,6 +83,8 @@ i {
   margin: 10px 0;
   background: #dfdfdf;
   border-radius: 5px;
+  position: absolute;
+  top: 10px;
 }
 
 footer {

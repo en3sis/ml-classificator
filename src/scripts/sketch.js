@@ -40,8 +40,6 @@ function draw () {
 
 /* Controller
 ========================================================================== */
-
-
 const predict = () => {
   classifier.classify(ctx, (err, result) => {
     if (err) console.error(err)
@@ -65,7 +63,7 @@ const saveModel = () => {
 
 const loadLocalModel = () => {
   classifier.load('../models/model-v0.0.1.json', () => {
-
+    $('.alert').show()
     $('.alert').text('✅ Local model was loaded!')
     setTimeout(() => $('.alert').hide(), 2500)
     $('.js-controller-model').show()
