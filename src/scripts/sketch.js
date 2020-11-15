@@ -1,4 +1,6 @@
-let featureExtractor, classifier, label, confidence, ctx, dataLoaded = false, trained = false
+let featureExtractor, classifier, label, confidence, ctx, dataLoaded = false, trained = false, numLabels, trainingData
+
+
 
 $(function () {
   $('.btn-group')
@@ -6,15 +8,18 @@ $(function () {
 })
 
 function preload () {
+  numLabels = dataSet.numLabels
+  trainingData = dataSet.trainingData
+
   featureExtractor = ml5
-    .featureExtractor('MobileNet', { numLabels: 4, epochs: 50 })
+    .featureExtractor('MobileNet', { numLabels, epochs: 50 })
 
   classifier = featureExtractor
     .classification()
 
   /*  Loading training data
   ========================================================================== */
-  dataSet
+  trainingData
     .map(item => {
       for (let i = 0; i < item.length; i++) {
         item.examples.push(loadImage(`dataset/${item.label}/${item.label}-${i}.jpg`))
@@ -24,12 +29,13 @@ function preload () {
 
 async function setup () {
   ctx = createCanvas(280, 280);
-  ctx
-    .parent('canvas')
+  ctx.parent('canvas')
   background(200)
 
+  ctx.mouseReleased(predict)
+
   await Promise
-    .all(dataSet
+    .all(trainingData
       .map(async item => {
         try {
           await loadData(item.examples, item.label)
@@ -66,6 +72,7 @@ function draw () {
   }
 }
 
+
 async function loadData (arr, label) {
   return await Promise
     .all(arr.map(async item => await classifier.addImage(item.canvas, label)))
@@ -79,6 +86,8 @@ const trainModel = () => {
     if (lossValue === null) {
       $('.js-prediction').show()
       $('.alert').text('✅ Training completed! \n You can now draw on the canvas and click on Predict button')
+
+      setTimeout(() => $('.alert').hide(), 2000)
       trained = true;
     }
 
@@ -116,4 +125,10 @@ const saveModel = () => {
 
 const loadModel = () => {
   // TODO: Load training data only on click, by default load local model once we have the v0.0.1
+}
+
+function keyPressed () {
+  if (key === ' ') {
+    resetCanvas()
+  }
 }
