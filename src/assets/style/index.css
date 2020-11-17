@@ -3,7 +3,7 @@ html, body {
 }
 
 body {
-  margin: 60px;
+  margin: 80px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -45,12 +45,6 @@ i {
   margin-right: 8px;
 }
 
-
-canvas {
-  margin: 30px;
-  margin-top: 0;
-}
-
 .prediction {
   display: flex;
   justify-content: space-between;
@@ -65,10 +59,15 @@ canvas {
 #label,
 #confidence {
   padding: 10px;
+  transition: all 1s ease-out;
 }
 
 #label {
   background: antiquewhite;
+}
+
+.canvas-controller {
+  margin-top: 5px;
 }
 
 .disabled {
@@ -84,6 +83,8 @@ canvas {
   margin: 10px 0;
   background: #dfdfdf;
   border-radius: 5px;
+  position: absolute;
+  top: 10px;
 }
 
 footer {
@@ -95,4 +96,18 @@ footer a, a:hover, a:active, a:visited {
   text-decoration: none;
   cursor: pointer;
   color: rgb(230, 230, 230);
+}
+
+canvas {
+  margin: 0 30px;
+}
+
+
+.description {
+  background: #f8f8f8;
+  font-size: 12px;
+  /* font-weight: 300; */
+  padding: 5px 20px;
+  width: 240px;
+  text-align: center;
 }
