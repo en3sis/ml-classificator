@@ -1,6 +1,5 @@
-# WIP: Node + Express in TypeScript | Boilerplate
-Small initial configuration for a NODEJS + ExpressJs application with TypeScript.
-
+# Endpoints
+Get some n ammount of examples from a dataset: http://localhost:8000/dataset?label=clock&quantity=5
 ## Scripts
 Before running any command, run `npm install`
 

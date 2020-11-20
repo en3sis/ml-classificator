@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>ML5 Icons Classification</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/eos-icons/dist/css/eos-icons.css' />
+  <link rel='stylesheet' href='./assets/style/index.css'>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id='canvas'></div>
+  <div class='btn-group js-controller-model'>
+    <button onclick="generateData()">
+      <i class='eos-icons'>model_training</i>
+      Generate Data
+    </button>
+  </div>
+
+  <footer>
+    <a href='https://github.com/en3sis/ml-classificator' , target='_blank'>Github</a>
+  </footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.js"
+  integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+<!-- p5 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.min.js"></script>
+<!-- ml5 -->
+<script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+<script src='./scripts/test-sketch.js'></script>
+
+</html>
