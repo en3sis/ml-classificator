@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "rootDir": "./src",
+    "target": "es6",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "./build",
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "importHelpers": true
+  },
+  "lib": [
+    "es2015"
+  ],
+  "typeRoots": [
+    "./",
+    "./node_modules/@types"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "tests/**"
+  ]
+}

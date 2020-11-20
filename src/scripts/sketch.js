@@ -79,13 +79,6 @@ function keyPressed () {
   }
 }
 
-const resetCanvas = () => {
-  clear()
-  background(200)
-}
-
-/*  Loading training data
-========================================================================== */
 const trainModel = async () => {
   $('.alert').show()
 
@@ -132,3 +125,11 @@ async function loadData (arr, label) {
   return await Promise
     .all(arr.map(async item => await classifier.addImage(item.canvas, label)))
 }
+
+const fetchDataset = () => {
+  fetch('http://localhost:8000/',)
+    .then(response => response.json())
+    .then(data => console.log(data));
+}
+
+fetchDataset()
